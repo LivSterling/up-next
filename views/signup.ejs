@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+  
+  <h1 class="text-3xl font-bold mb-6 text-centerz">Sign Up</h1>
+<form action="/signup" method="POST" class="space-y-4">
+  <input name="username" placeholder="Username" class="input input-bordered w-full" required />
+  <input name="email" placeholder="Email" type="email" class="input input-bordered w-full" required />
+  <input name="password" placeholder="Password" type="password" class="input input-bordered w-full" required />
+  <button type="submit" class="btn btn-primary w-full">Sign Up</button>
+</form>
+
+<p>Already have an account? Log in <a href="/login">here</a>.</p>
+
+<%- include('partials/footer') %>
