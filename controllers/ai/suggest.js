@@ -1,9 +1,9 @@
 const cloudinary = require("../../middleware/cloudinary");
  const {InferenceClient} = require( "@huggingface/inference");
  const {OpenAI} = require( "openai");
- 
-const hfClient = new InferenceClient(process.env.HF_API_KEY); // huggingface token
+ const hfClient = new InferenceClient(process.env.HF_API_KEY); // huggingface token
 const client = new OpenAI(process.env.OPENAI_API_KEY);
+
 module.exports = {
     generateSuggestions: async (req, res) => {
         try {
