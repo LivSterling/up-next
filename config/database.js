@@ -1,6 +1,17 @@
-// config/database.js
-module.exports = {
+const mongoose = require("mongoose");
 
-    'url' : 'mongodb+srv://sterling:yoda@cluster0.itfseet.mongodb.net/thriftflip?retryWrites=true&w=majority&appName=Cluster0', 
-    'dbName': 'thriftflip'
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.DB_STRING, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 };
+
+module.exports = connectDB;

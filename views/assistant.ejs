@@ -1,0 +1,41 @@
+<%- include('partials/header') -%>
+    <main class="bg-base-300 h-screen">
+        <section class="flex justify-center flex-col">
+            <h1 class="font-bold text-2xl text-center ">Hey! Im François. Your personal design assistant.</h1>
+            <p class="text-center">Upload a photo of a garment and I can give you fresh design and upsycling ideas for
+                your
+                given garment!</p>
+
+            <div class="flex justify-center flex-col bg-base-100 shadow-lg p-6 mt-6">
+                <h3 class="text-lg font-semibold mb-4 text-center">Upload Garment</h3>
+
+                <form id="aiForm" enctype="multipart/form-data" class="space-y-4">
+                    <input type="file" name="file" id="fileInput" class="file-input file-input-bordered w-full" />
+                    <%# <textarea name="caption" placeholder="Add Notes (Optional)"
+                        class="textarea textarea-bordered w-full"></textarea> %>
+                        <button type="submit" class="btn btn-primary w-full">Generate suggestions</button>
+                </form>
+                <div id="loading" class="hidden">
+                    <span class="block loading mx-auto mt-10 loading-bars loading-xl text-center "></span>
+                    <span class="block mx-auto text-center font-bold">Brainstorming Design Ideas...</span>
+                </div>
+
+
+
+                <div id="resultsContainer" class="mt-6 flex">
+
+                </div>
+
+                <div id="mockupContainer" class="mt-6"></div>
+
+            </div>
+        </section>
+    </main>
+
+
+
+    <script type="text/javascript" src="main.js"></script>
+
+    <%- include('partials/footer') -%>
+
+        

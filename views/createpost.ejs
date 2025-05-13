@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<div class="max-w-xl mx-auto mt-10 p-6 bg-base-200 rounded-lg shadow">
+  <h1 class="text-2xl font-bold mb-6 text-center">Create a New Thrift Flip</h1>
+
+  <form action="/post/createPost" enctype="multipart/form-data" method="POST" class="space-y-4">
+    <div>
+      <label for="title" class="label">
+        <span class="label-text font-semibold">Title</span>
+      </label>
+      <input type="text" id="title" name="title" class="input input-bordered w-full" />
+    </div>
+
+    <div>
+      <label for="caption" class="label">
+        <span class="label-text font-semibold">Caption</span>
+      </label>
+      <textarea id="caption" name="caption" class="textarea textarea-bordered w-full"></textarea>
+    </div>
+
+    <div>
+      <label for="imageUpload" class="label">
+        <span class="label-text font-semibold">Image</span>
+      </label>
+      <input type="file" id="imageUpload" name="file" class="file-input file-input-bordered w-full" />
+    </div>
+
+    <div>
+      <label for="tags" class="label">
+        <span class="label-text font-semibold">Tags (comma-separated)</span>
+      </label>
+      <input type="text" id="tags" name="tags" class="input input-bordered w-full" />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-full">Submit Project</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

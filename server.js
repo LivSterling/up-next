@@ -1,66 +1,68 @@
-// server.js
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const methodOverride = require("method-override");
+const flash = require("express-flash");
+const logger = require("morgan");
+const connectDB = require("./config/database");
+const mainRoutes = require("./routes/main");
+const postRoutes = require("./routes/posts");
+const commentRoutes = require("./routes/comments");
+const suggestRoutes = require("./routes/ai/suggest");
 
-// set up ======================================================================
-// get all the tools we need
-const express = require('express')
-const app = express()
-const port     = process.env.PORT || 7070
-const MongoClient = require('mongodb').MongoClient
-const mongoose = require('mongoose')
-const session = require('express-session')
-const bcrypt = require('bcrypt')
-require('dotenv').config()
-const passport = require('passport')
-const User = require('./app/models/user')
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" });
 
+// Passport config
+require("./config/passport")(passport);
 
+//Connect To Database
+connectDB();
 
+//Using EJS for views
+app.set("view engine", "ejs");
 
-const configDB = require('./config/database.js')
+//Static Folder
+app.use(express.static("public"));
 
-let db
+//Body Parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// configuration ===============================================================
+//Logging
+app.use(logger("dev"));
 
-mongoose.connect(configDB.url || process.env.DB_string, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+//Use forms for put / delete
+app.use(methodOverride("_method"));
+
+// Setup Sessions - stored in MongoDB
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
-  .then(() => {
-    console.log('MongoDB connected')
-    app.listen(port, () => {
-      console.log(`The magic happens on port ${port}`)
-    })
-  })
-  .catch(err => console.error(err))
-  // connect to our database
+);
 
-require('./config/passport')(passport)// pass passport for configuration
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.set('view engine', 'ejs') // set up ejs for templating
-app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+//Use flash messages for errors, info, ect...
+app.use(flash());
 
-// required for passport
-app.use(session({
-  secret: "thriftSessionKey" || process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-}))
-app.use(passport.initialize())
-app.use(passport.session())
+//Setup Routes For Which The Server Is Listening
+app.use("/", mainRoutes);
+app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
+app.use("/ai", suggestRoutes);
 
-// launch ======================================================================
 
-const authRoutes = require('./app/routes/auth')
-const homeRoutes = require('./app/routes/home.js')
-const projectRoutes = require('./app/routes/project-routes.js')
-app.use('/projects', projectRoutes)
-app.use('/', authRoutes)
-
-app.use('/', homeRoutes)
-
-app.get('/', (req, res) => {
-        res.redirect('projects')
-      })  
+//Server Running
+app.listen(process.env.PORT, () => {
+  console.log("Server is running, you better catch it!");
+});

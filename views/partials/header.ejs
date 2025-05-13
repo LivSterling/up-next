@@ -1,19 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ThriftFlip Tracker</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.18/dist/full.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpNext</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png" />
+
+  <!-- Tailwind + DaisyUI CDN remove before demo day -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Font Awesome (optional, for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
-<body class="bg-base-100 text-base-content">
 
-  <div class="navbar bg-base-200 px-4">
-    <a href="/" class="text-xl font-bold">ThriftFlip</a>
-    <div class="ml-auto">
-      <a href="/projects/new" class="btn btn-sm btn-accent">New Project</a>
+<body>
+  <header class="bg-base-100 shadow-md sticky top-0 z-50">
+    <div class="navbar max-w-7xl mx-auto px-4">
+      <div class="flex-1">
+        <a href="/feed" class="text-2xl font-bold tracking-tight text-primary">UpNext</a>
+      </div>
+      <div class="flex gap-4">
+         <a href="/feed" class="btn btn-sm btn-outline">Feed</a>
+        <a href="/profile" class="btn btn-sm btn-outline">Profile</a>
+        <a href="/assistant" class="btn btn-sm btn-secondary ">AI Design Assistant</a>
+        
+        <button class="btn btn-sm btn-accent" onclick="my_modal_3.showModal()">New Project</button>
+      </div>
     </div>
-  </div>
-
-  <main class="p-6">
+    <dialog id="my_modal_3" class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <form action="/post/createPost" enctype="multipart/form-data" method="POST" class="space-y-4">
+          <input type="text" name="title" placeholder="Title" class="input input-bordered w-full" />
+          <textarea name="caption" placeholder="Caption" class="textarea textarea-bordered w-full"></textarea>
+          <input type="file" name="file" class="file-input file-input-bordered w-full" />
+          <label for="tags" class="label">
+            <span class="label-text font-semibold">Tags (comma-separated)</span>
+          </label>
+          <input type="text" id="tags" name="tags" class="input input-bordered w-full" />
+          <button type="submit" class="btn btn-primary w-full">Submit</button>
+        </form>
+      </div>
+    </dialog>
+  </header>

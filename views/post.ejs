@@ -1,0 +1,92 @@
+<%- include('partials/header') -%>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="flex flex-col lg:flex-row gap-8">
+
+      <!-- Left: Post Image -->
+      <div class="flex-1 bg-base-200 rounded-lg overflow-hidden">
+        <img src="<%= post.image %>" alt="Post image" class="w-full object-cover max-h-[80vh]" />
+
+    <% post.tags.forEach(tag => { %>
+      <span class="badge badge-outline mr-2">#<%= tag %></span>
+    <% }) %>
+  
+      </div>
+
+      <!-- Right: Post Details (keep this inside the flex row layout) -->
+      <div class="w-full lg:w-[400px] flex flex-col justify-between max-h-[80vh]">
+
+        <!-- Scrollable content area -->
+        <div class="overflow-y-auto pr-2 space-y-4">
+          <!-- Post Caption -->
+          <div class="border-b border-base-300 pb-4">
+            <div class="flex justify-between items-center">
+              <h3 class="font-semibold text-lg">
+                <div class="avatar">
+          <div class="w-5 rounded-full ">
+            <img src="../public/imgs/favicon-32x32.png" alt="User avatar" />
+          </div>
+        </div>
+                <%= post.user.userName %>
+              </h3>
+              <small class="text-sm text-gray-500">3 days ago</small>
+            </div>
+            <p class="mt-1">
+              <%= post.caption %>
+            </p>
+          </div>
+
+          <!-- Comments -->
+          <ul class="space-y-3">
+            <% for (let i=0; i < comments.length; i++) { %>
+              <li class="border-b border-base-300 pb-2">
+                <div class="flex justify-between items-center">
+                  <h6 class="font-semibold text-sm"><%= comments[i].user.userName %>
+                  </h6>
+                  <form action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
+                    <button class="btn btn-ghost btn-xs text-error">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </form>
+                </div>
+                <p class="text-sm mt-1">
+                  <%= comments[i].commentText %>
+                </p>
+                <small class="text-xs text-gray-500">Likes: <%= comments[i].likes %></small>
+              </li>
+              <% } %>
+          </ul>
+        </div>
+
+        <!-- Interaction Bar: pinned to bottom -->
+        <div class="pt-4 border-t mt-4 space-y-4">
+          <!-- Like/Delete buttons -->
+          <div class="flex justify-between items-center">
+            <form action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+              <button class="btn btn-ghost text-error">
+                <i class="fas fa-heart"></i>
+              </button>
+            </form>
+            <p class="text-sm font-medium">Likes: <%= post.likes %>
+            </p>
+            <% if (post.user==user.id) { %>
+              <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-ghost text-error">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+              <% } %>
+          </div>
+
+          <!-- Add Comment -->
+          <form action="/comment/createComment/<%= post.id %>" method="POST" class="flex gap-2">
+            <input type="text" name="comment" placeholder="Add a comment..."
+              class="input input-bordered input-sm w-full" />
+            <button type="submit" class="btn btn-sm btn-primary">Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') -%>

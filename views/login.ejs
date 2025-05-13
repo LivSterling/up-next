@@ -1,12 +1,49 @@
-<%- include('partials/header') %>
+<%- include('partials/header') -%>
 
-  <h1 class="text-3xl font-bold mb-6 text-centerz">Login</h1>
-<form action="/login" method="POST" class="space-y-4">
-  <input name="username" placeholder="Username" class="input input-bordered w-full" required />
-  <input name="password" placeholder="Password" type="password" class="input input-bordered w-full" required />
-  <button type="submit" class="btn btn-primary w-full">Login</button>
-</form>
+<main class="flex justify-center items-center min-h-[80vh] px-4">
+  <section class="w-full max-w-md bg-base-200 p-6 rounded-lg shadow">
+    <% if (locals.messages.errors) { %>
+      <% messages.errors.forEach(el => { %>
+        <div class="alert alert-error mb-4"><%= el.msg %></div>
+      <% }) %>
+    <% } %>
 
-<p class="label-text">Don't have an account? Sign up <a href="/signup">here.</a></p>
-  
-<%- include('partials/footer') %>
+    <% if (locals.messages.info) { %>
+      <% messages.info.forEach(el => { %>
+        <div class="alert alert-info mb-4"><%= el.msg %></div>
+      <% }) %>
+    <% } %>
+
+    <h2 class="text-xl font-bold mb-6 text-center">Login to UpNext</h2>
+
+    <form action="/login" method="POST" class="space-y-4">
+      <div>
+        <label for="email" class="label">
+          <span class="label-text font-semibold">Email Address</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <div>
+        <label for="password" class="label">
+          <span class="label-text font-semibold">Password</span>
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-full">Login</button>
+    </form>
+  </section>
+</main>
+
+<%- include('partials/footer') -%>
