@@ -8,7 +8,7 @@ A fashion upcycling community powered by AI and creativity.
 
 **UpNext** is a full-stack, community-driven platform where fashion lovers—from seasoned DIYers to curious beginners—can document their clothing upcycles, get AI-powered suggestions, and inspire others through shared creativity.
 
-Every year, 92 million tons of textile waste end up in landfills. UpNext aims to reduce that number by helping people reimagine what they already own.
+Every year, 92 million tons of textile waste ends up in landfills. UpNext aims to reduce that number by helping people reimagine what they already own.
 
 ---
 
@@ -16,7 +16,8 @@ Every year, 92 million tons of textile waste end up in landfills. UpNext aims to
 
 - Before & After Posts — Upload upcycling projects with captions, tags, and images  
 - Comment & Like System — Interact with other creatives in the feed  
-- AI Assistant — Suggests creative ways to upcycle garments based on uploaded photos  
+- AI Assistant — Suggests creative ways to upcycle garments based on uploaded photos
+- AI mockup Generation - Geneate mockups of AI assistant suggested projects to kickstart you on the right path
 - Authentication — Secure user login with Passport.js  
 - User Profiles — View your own uploads and track your projects  
 
@@ -24,7 +25,7 @@ Every year, 92 million tons of textile waste end up in landfills. UpNext aims to
 
 ## Live App
 
-Coming soon — to be hosted on Render.
+[Live App](https://up-next-sitn.onrender.com/)
 
 ---
 
@@ -69,10 +70,11 @@ API_SECRET=your_cloudinary_api_secret
 Throughout building UpNext, I developed key skills in:
 
 - RESTful routing and MVC architecture  
-- Working with MongoDB and Mongoose for full CRUD functionality  
+- Working with MongoDB and Mongoose for full CRUD functionality
+- Creating multimodal AI functionality   
 - Handling file uploads and cloud storage via Cloudinary  
 - Structuring Express middleware and controller logic  
-- Integrating AI tools into full-stack applications  
+- Integrating AI tools into full-stack applications
 - Creating responsive, clean UIs with DaisyUI  
 - Building secure login systems with Passport  
 
