@@ -15,7 +15,7 @@ module.exports = {
 
 
             const input = {
-                prompt: `A stylized fashion mockup of a ${description}, upcycled using this design: ${idea}. Studio lighting, editorial photo style, minimalist background.`,
+                prompt: `Take this described garment: ( ${description}, and turn it into a stylized fashion mockup of an upcycled redesigned garment using this design: ${idea}. Use Studio lighting, editorial photo style, minimalist background.`,
                aspect_ratio: "1:1",
   output_format: "webp",
   output_quality: 80,

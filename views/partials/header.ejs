@@ -25,17 +25,21 @@
 </head>
 
 <body>
-  <header class="bg-base-100 shadow-md sticky top-0 z-50">
-    <div class="navbar max-w-7xl mx-auto px-4">
-      <div class="flex-1">
-        <a href="/feed" ><img class="text-2xl font-bold tracking-tight text-primary  h-12" src="/imgs/logo-purple-no-background.png" alt=""></a>
+  <div class="flex">
+  <header class="bg-base-100 flex flex-col  overflow-hidden w-1/6
+  0 h-screen sticky top-1 shadow-md z-50" >
+    <div class="navbar flex flex-col  mx-auto px-4 ">
+      <div class="p-4">
+        <a href="/feed" ><img class="text-2xl m-8 font-bold tracking-tight text-primary ml-auto mr-auto h-12" src="/imgs/logo-purple-no-background2.png" alt=""></a>
       </div>
-      <div class="flex gap-4">
-         <a href="/feed" class="btn btn-sm btn-outline">Feed</a>
-        <a href="/profile" class="btn btn-sm btn-outline">Profile</a>
-        <a href="/assistant" class="btn btn-sm btn-secondary ">AI Design Assistant</a>
+      <div class="flex flex-col  gap-10">
+         <a href="/feed" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-compass-drafting"></i>   Feed</a>
+        <a href="/profile" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-user-astronaut"></i>   Profile</a>
+        <a href="/assistant" class=" shadow-lg text-2xl p-3 "><i class="fa-solid fa-vest-patches"></i>   AI Design Assistant</a>
         
-        <button class="btn btn-sm btn-accent" onclick="my_modal_3.showModal()">New Project</button>
+        <button class="shadow-lg text-2xl p-3 text-left" onclick="my_modal_3.showModal()"><i class="fa-solid fa-scissors"></i>   New Project</button>
+        <a href="/feed" class="shadow-lg text-2xl p-3 "><i class="fa-solid fa-magnifying-glass"></i>   Search</a>
+        <a href="/logout" class="shadow-lg text-2xl p-3 "><i class="fa-solid fa-arrow-right-from-bracket"></i>   Logout</a>  
       </div>
     </div>
     <dialog id="my_modal_3" class="modal">
@@ -55,4 +59,6 @@
         </form>
       </div>
     </dialog>
+
+
   </header>

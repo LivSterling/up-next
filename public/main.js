@@ -48,7 +48,7 @@ document.getElementById('aiForm').addEventListener('submit', async function (e) 
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = `
 
-    <div>${marked.parse(ideas[1])}<div>
+
     
       <img class="max-h-120 max-w-90" src="${data.image}"" />
         <div class="flex-3">

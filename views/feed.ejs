@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 
-<main class="max-w-6xl mx-auto px-4 py-10">
+<main class="flex-5/6 mx-auto overflow-y-auto px-100 py-20">
   <div class="grid  gap-4">
     <% for (let i = 0; i < posts.length; i++) { %>
       <a href="/post/<%= posts[i]._id %>" class="block rounded overflow-hidden group">
