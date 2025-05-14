@@ -12,6 +12,7 @@ const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 const suggestRoutes = require("./routes/ai/suggest");
+const mockupRoutes = require("./routes/ai/mockup");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -60,6 +61,9 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 app.use("/ai", suggestRoutes);
+app.use("/ai", mockupRoutes);
+app.use(express.static("public"));
+
 
 
 //Server Running

@@ -37,7 +37,8 @@ document.getElementById('aiForm').addEventListener('submit', async function (e) 
     .split('- ')
     .filter(line => line.trim() !== '')
     .map(line => `- ◾ ${line.trim()}`) // restore the dash for Markdown
-    .join('\n'); // line breaks between bullets
+    .join('\n')
+    .replaceAll('###', ''); // line breaks between bullets
 };
     
 
@@ -46,6 +47,8 @@ document.getElementById('aiForm').addEventListener('submit', async function (e) 
 
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = `
+
+    <div>${marked.parse(ideas[1])}<div>
     
       <img class="max-h-120 max-w-90" src="${data.image}"" />
         <div class="flex-3">
@@ -94,13 +97,6 @@ document.getElementById('aiForm').addEventListener('submit', async function (e) 
 
             </div>
         </div>`;
-
-  } catch (err) {
-    console.error('Error:', err);
-  }
-  loadingbar.classList.add("hidden")
-});
-
 document.querySelectorAll('.generateMockupBtn').forEach(button => {
   button.addEventListener('click', async function () {
     const idea = decodeURIComponent(this.dataset.idea)
@@ -128,3 +124,9 @@ document.querySelectorAll('.generateMockupBtn').forEach(button => {
     }
   });
 });
+  } catch (err) {
+    console.error('Error:', err);
+  }
+  loadingbar.classList.add("hidden")
+});
+
