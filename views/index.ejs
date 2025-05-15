@@ -1,147 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UpNext</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UpNext</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png" />
+  <body>
+    <header class="bg-base-100 shadow-md sticky top-0 z-50 h-auto sm:h-20 flex flex-wrap sm:flex-nowrap items-center justify-between px-4">
+      <a href="/feed"><img class="h-12 sm:h-16" src="/imgs/logo-purple-no-background2.png" alt="Logo" /></a>
+      <form action="/login" method="POST" class="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 mt-2 sm:mt-0">
+        <input type="email" id="email" name="email" class="input input-bordered w-36 sm:w-40 text-sm" placeholder="Email" />
+        <input type="password" id="password" name="password" class="input input-bordered w-36 sm:w-40 text-sm" placeholder="Password" />
+        <button type="submit" class="btn btn-primary w-full sm:w-auto">Login</button>
+      </form>
+    </header>
 
-  <!-- Tailwind + DaisyUI CDN remove before demo day -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-
-      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  
-  <!-- Font Awesome (optional, for icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Your custom CSS -->
-  <link rel="stylesheet" href="/css/style.css" />
-</head>
-
-<body>
-  <header class="bg-base-100 shadow-md sticky top-0 z-50 h-20 flex items-center">
-    <div class="navbar max-w-7xl mx-auto px-4">
-      <div class="flex-1">
-        <a href="/feed" ><img class="text-2xl font-bold tracking-tight text-primary  h-16" src="/imgs/logo-purple-no-background2.png" alt=""></a>
-      </div>
-      <div class="flex gap-4">
-<form action="/login" method="POST" class="flex gap-4">
-      <div>
-       
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="input input-bordered w-40"
-          placeholder="Email Address"
-        />
+    <main class="flex flex-col lg:flex-row items-center justify-center min-h-[80vh] px-4 sm:px-8 py-8 gap-8">
+      <div class="text-center space-y-6 max-w-xl">
+        <h1 class="text-3xl sm:text-4xl font-bold text-primary">Welcome to UpNext</h1>
+        <p class="text-base sm:text-lg text-gray-600">Share your upcycled fashion. Discover creative flips.</p>
+        <img src="/imgs/landingpage2.png" class="w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto" alt="upcycling photos" />
       </div>
 
-      <div>
-       
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="input input-bordered w-40"
-          placeholder="password"
-        />
-      </div>
+      <section class="w-full max-w-md bg-base-200 p-6 rounded-lg shadow">
+        <% if (locals.messages.errors) { %>
+          <% messages.errors.forEach(el => { %>
+            <div class="alert alert-error mb-4"><%= el.msg %></div>
+          <% }) %>
+        <% } %>
 
-      <button type="submit" class="btn btn-primary w-30">Login</button>
-    </form>
-      </div>
-    </div>
-    
-  </header>
-<main class="flex justify-items-center items-center min-h-[80vh] px-4">
-  <div class="text-center space-y-6 flex flex-col items-center">
-    <h1 class="text-4xl font-bold tracking-tight text-primary">Welcome to UpNext</h1>
-    <p class="text-lg text-gray-600">Share your upcycled fashion. Discover creative flips.</p>
-    
-    <img src="/imgs/landingpage2.png" class=" w-3/6" alt="upcycling photos">
-  </div>
+        <% if (locals.messages.info) { %>
+          <% messages.info.forEach(el => { %>
+            <div class="alert alert-info mb-4"><%= el.msg %></div>
+          <% }) %>
+        <% } %>
 
-  <section class="w-full max-w-md bg-base-200 p-6 rounded-lg shadow">
-    <% if (locals.messages.errors) { %>
-      <% messages.errors.forEach(el => { %>
-        <div class="alert alert-error mb-4"><%= el.msg %></div>
-      <% }) %>
-    <% } %>
+        <h2 class="text-lg sm:text-xl font-bold mb-6 text-center">Sign Up for UpNext</h2>
+        <form action="/signup" enctype="multipart/form-data" method="POST" class="space-y-4">
+          <div>
+            <label for="userName" class="label"><span class="label-text font-semibold">User Name</span></label>
+            <input type="text" id="userName" name="userName" class="input input-bordered w-full" />
+          </div>
 
-    <% if (locals.messages.info) { %>
-      <% messages.info.forEach(el => { %>
-        <div class="alert alert-info mb-4"><%= el.msg %></div>
-      <% }) %>
-    <% } %>
+          <div>
+            <label for="email" class="label"><span class="label-text font-semibold">Email Address</span></label>
+            <input type="email" id="email" name="email" class="input input-bordered w-full" />
+            <p class="text-xs text-gray-500 mt-1">We’ll never share your email with anyone else.</p>
+          </div>
 
-    <h2 class="text-xl font-bold mb-6 text-center">Sign Up for UpNext</h2>
+          <div>
+            <label for="file" class="label"><span class="label-text font-semibold">Profile Photo</span></label>
+            <input type="file" name="file" class="file-input file-input-bordered w-full" />
+          </div>
 
-    <form action="/signup" enctype="multipart/form-data" method="POST" class="space-y-4">
-      <div>
-        <label for="userName" class="label">
-          <span class="label-text font-semibold">User Name</span>
-        </label>
-        <input
-          type="text"
-          id="userName"
-          name="userName"
-          class="input input-bordered w-full"
-        />
-      </div>
+          <div>
+            <label for="password" class="label"><span class="label-text font-semibold">Password</span></label>
+            <input type="password" id="password" name="password" class="input input-bordered w-full" />
+          </div>
 
-      <div>
-        <label for="email" class="label">
-          <span class="label-text font-semibold">Email Address</span>
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="input input-bordered w-full"
-        />
-        <p class="text-xs text-gray-500 mt-1">We’ll never share your email with anyone else.</p>
-      </div>
+          <div>
+            <label for="confirmPassword" class="label"><span class="label-text font-semibold">Confirm Password</span></label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="input input-bordered w-full" />
+          </div>
 
-      <div>
-        <label for="file" class="label">
-          <span class="label-text font-semibold">Profile Photo</span>
-        </label>
-        <input type="file" name="file" class="file-input file-input-bordered w-full" />
+          <button type="submit" class="btn btn-primary w-full">Create Account</button>
+        </form>
+      </section>
+    </main>
 
-      <div>
-        <label for="password" class="label">
-          <span class="label-text font-semibold">Password</span>
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="input input-bordered w-full"
-        />
-      </div>
-
-      <div>
-        <label for="confirmPassword" class="label">
-          <span class="label-text font-semibold">Confirm Password</span>
-        </label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          class="input input-bordered w-full"
-        />
-      </div>
-
-      <button type="submit" class="btn btn-primary w-full">Create Account</button>
-    </form>
-  </section>
-</main>
-
-<%- include('partials/footer') -%>
+    <%- include('partials/footer') -%>
+  </body>
+</html>

@@ -26,39 +26,50 @@
 
 <body>
   <div class="flex">
-  <header class="bg-base-100 flex flex-col  overflow-hidden w-1/6
-  0 h-screen sticky top-1 shadow-md z-50" >
-    <div class="navbar flex flex-col  mx-auto px-4 ">
-      <div class="p-4">
-        <a href="/feed" ><img class="text-2xl m-8 font-bold tracking-tight text-primary ml-auto mr-auto h-12" src="/imgs/logo-purple-no-background2.png" alt=""></a>
-      </div>
-      <div class="flex flex-col  gap-10">
-         <a href="/feed" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-compass-drafting"></i>   Feed</a>
-        <a href="/profile" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-user-astronaut"></i>   Profile</a>
-        <a href="/assistant" class=" shadow-lg text-2xl p-3 "><i class="fa-solid fa-vest-patches"></i>   AI Design Assistant</a>
-        
-        <button class="shadow-lg text-2xl p-3 text-left" onclick="my_modal_3.showModal()"><i class="fa-solid fa-scissors"></i>   New Project</button>
-        <a href="/feed" class="shadow-lg text-2xl p-3 "><i class="fa-solid fa-magnifying-glass"></i>   Search</a>
-        <a href="/logout" class="shadow-lg text-2xl p-3 "><i class="fa-solid fa-arrow-right-from-bracket"></i>   Logout</a>  
-      </div>
+ <header class="hidden lg:flex bg-base-100 flex-col w-1/6 h-screen sticky top-0 shadow-md z-50">
+  <div class="navbar flex flex-col mx-auto px-4">
+    <div class="p-4">
+      <a href="/feed">
+        <img class="text-2xl m-8 font-bold tracking-tight text-primary mx-auto h-12" src="/imgs/logo-purple-no-background2.png" alt="Logo" />
+      </a>
     </div>
-    <dialog id="my_modal_3" class="modal">
-      <div class="modal-box">
-        <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-        </form>
-        <form action="/post/createPost" enctype="multipart/form-data" method="POST" class="space-y-4">
-          <input type="text" name="title" placeholder="Title" class="input input-bordered w-full" />
-          <textarea name="caption" placeholder="Caption" class="textarea textarea-bordered w-full"></textarea>
-          <input type="file" name="file" class="file-input file-input-bordered w-full" />
-          <label for="tags" class="label">
-            <span class="label-text font-semibold">Tags (comma-separated)</span>
-          </label>
-          <input type="text" id="tags" name="tags" class="input input-bordered w-full" />
-          <button type="submit" class="btn btn-primary w-full">Submit</button>
-        </form>
-      </div>
-    </dialog>
+    <div class="flex flex-col gap-10">
+      <a href="/feed" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-compass-drafting"></i> Feed</a>
+      <a href="/profile" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-user-astronaut"></i> Profile</a>
+      <a href="/assistant" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-vest-patches"></i> AI Design Assistant</a>
+      <button class="shadow-lg text-2xl p-3 text-left" onclick="my_modal_3.showModal()"><i class="fa-solid fa-scissors"></i> New Project</button>
+      <a href="/feed" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+      <a href="/logout" class="shadow-lg text-2xl p-3"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+    </div>
+  </div>
+</header>
 
+<!-- Mobile Bottom Nav -->
+<nav class="fixed bottom-0 left-0 right-0 bg-base-100 border-t border-base-300 flex justify-around items-center p-2 lg:hidden z-50">
+  <a href="/feed" class="text-xl"><i class="fa-solid fa-compass-drafting"></i></a>
+  <a href="/profile" class="text-xl"><i class="fa-solid fa-user-astronaut"></i></a>
+  <a href="/assistant" class="text-xl"><i class="fa-solid fa-vest-patches"></i></a>
+  <button onclick="my_modal_3.showModal()" class="text-xl"><i class="fa-solid fa-scissors"></i></button>
+  <a href="/logout" class="text-xl"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+</nav>
+
+<!-- Modal stays the same -->
+<dialog id="my_modal_3" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <form action="/post/createPost" enctype="multipart/form-data" method="POST" class="space-y-4">
+      <input type="text" name="title" placeholder="Title" class="input input-bordered w-full" />
+      <textarea name="caption" placeholder="Caption" class="textarea textarea-bordered w-full"></textarea>
+      <input type="file" name="file" class="file-input file-input-bordered w-full" />
+      <label for="tags" class="label">
+        <span class="label-text font-semibold">Tags (comma-separated)</span>
+      </label>
+      <input type="text" id="tags" name="tags" class="input input-bordered w-full" />
+      <button type="submit" class="btn btn-primary w-full">Submit</button>
+    </form>
+  </div>
+</dialog>
 
   </header>
