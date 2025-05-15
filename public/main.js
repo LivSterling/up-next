@@ -4,6 +4,7 @@ document.getElementById('aiForm').addEventListener('submit', async function (e) 
   e.preventDefault(); // Prevent form from reloading page
 
   const loadingbar = document.getElementById("loading")
+  const loadingbarTwo = document.getElementById("loadingTwo")
   const fileInput = document.getElementById('fileInput');
   const formData = new FormData();
   formData.append('file', fileInput.files[0]);
@@ -100,7 +101,9 @@ document.getElementById('aiForm').addEventListener('submit', async function (e) 
 document.querySelectorAll('.generateMockupBtn').forEach(button => {
   button.addEventListener('click', async function () {
     const idea = decodeURIComponent(this.dataset.idea)
+    const loadingbarTwo = document.getElementById("loadingTwo")
     const description = decodeURIComponent(this.dataset.description)
+    loadingbarTwo.classList.remove("hidden")
 
   try {
 
@@ -117,16 +120,18 @@ document.querySelectorAll('.generateMockupBtn').forEach(button => {
     const mockupContainer = document.getElementById('mockupContainer');
     mockupContainer.innerHTML = `
     <h3>Here's your Mockup</h3>
-    <img src="${data.image}" class="max-w-90 rounded shadow" />
+    <img src="${data.image}" class="h-screen rounded shadow" />
       `;
   } catch (err) {
     console.error('Mockup generation failed:', err);
     }
+    loadingbarTwo.classList.add("hidden")
   });
 });
   } catch (err) {
     console.error('Error:', err);
   }
   loadingbar.classList.add("hidden")
+  
 });
 
