@@ -13,6 +13,11 @@ const PostSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  type: {
+    type: String,
+    enum: ['image', 'video'],
+    required: true,
+  },
   caption: {
     type: String,
     required: true,

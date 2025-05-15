@@ -5,13 +5,21 @@
 
       <!-- Left: Post Image -->
       <div class="flex-1 bg-base-200 rounded-lg overflow-hidden">
-        <img src="<%= post.image %>" alt="Post image" class="w-full object-cover max-h-[80vh]" />
+        <% if (post.type==='video' ) { %>
+          <video controls class="w-full max-h-[80vh]">
+            <source src="<%= post.image %>" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <% } else { %>
+            <img src="<%= post.image %>" alt="Post image" class="w-full rounded-lg object-cover max-h-[80vh]" />
+            <% } %>
 
-    <% post.tags.forEach(tag => { %>
-      <span class="badge badge-outline mr-2">#<%= tag %></span>
-    <% }) %>
-  
+              <% post.tags.forEach(tag=> { %>
+                <span class="badge badge-outline mr-2">#<%= tag %></span>
+                <% }) %>
+
       </div>
+
 
       <!-- Right: Post Details (keep this inside the flex row layout) -->
       <div class="w-full lg:w-[400px] flex flex-col justify-between max-h-[80vh]">
@@ -23,10 +31,10 @@
             <div class="flex justify-between items-center">
               <h3 class="font-semibold text-lg">
                 <div class="avatar">
-          <div class="w-5 rounded-full ">
-            <img src="/imgs/profile-demo.png" alt="User avatar" />
-          </div>
-        </div>
+                  <div class="w-8 rounded-full ">
+                    <img src="<%= post.user.image %>" alt="User avatar" />
+                  </div>
+                </div>
                 <%= post.user.userName %>
               </h3>
               <small class="text-sm text-gray-500">3 days ago</small>
@@ -41,8 +49,14 @@
             <% for (let i=0; i < comments.length; i++) { %>
               <li class="border-b border-base-300 pb-2">
                 <div class="flex justify-between items-center">
-                  <h6 class="font-semibold text-sm"><%= comments[i].user.userName %>
-                  </h6>
+                  <h6 class="font-semibold text-sm">
+                <div class="avatar">
+                  <div class="w-5 rounded-full ">
+                    <img src="<%= comments[i].user.image %>" alt="User avatar" />
+                  </div>
+                </div>
+                <%= comments[i].user.userName %>
+              </h6>
                   <form action="/comment/likeComment/<%= comments[i]._id %>?_method=PUT" method="POST">
                     <button class="btn btn-ghost btn-xs text-error">
                       <i class="fas fa-heart"></i>

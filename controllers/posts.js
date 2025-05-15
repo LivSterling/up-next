@@ -13,7 +13,7 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().populate("user").sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -30,13 +30,18 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
+      const isVideo = req.file.mimetype.startsWith("video/");
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path, {
+  resource_type: isVideo ? "video" : "image",
+  folder: isVideo ? "videos" : "images", 
+});
 
       await Post.create({
         title: req.body.title,
         image: result.secure_url,
         cloudinaryId: result.public_id,
+        type: isVideo ? "video" : "image",
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,

@@ -7,7 +7,7 @@
       <div class="flex items-center gap-4">
         <div class="avatar">
           <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-            <img src="/imgs/profile-demo.png" alt="User avatar" />
+            <img src="<%= user.image %>" alt="User avatar" />
           </div>
         </div>
         <div>
@@ -37,6 +37,13 @@
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <% for(let i = 0; i < posts.length; i++) { %>
         <a href="/post/<%= posts[i]._id %>" class="block rounded overflow-hidden hover:scale-105 transition">
-          <img src="<%= posts[i].image %>" class="w-full h-full object-cover" />
+          <% if (posts[i].type === 'video') { %>
+  <video controls class="w-full max-h-[80vh]">
+    <source src="<%= posts[i].image %>" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+<% } else { %>
+  <img src="<%= posts[i].image %>" alt="Post image" class="w-full rounded-lg object-cover max-h-[80vh]" />
+<% } %>
         </a>
       <% } %>

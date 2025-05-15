@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const cloudinary = require("../middleware/cloudinary");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -75,7 +76,7 @@ exports.postSignup = async (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../signup");
+    return res.redirect("../");
   }
 
   req.body.email = validator.normalizeEmail(req.body.email, {
@@ -91,12 +92,25 @@ exports.postSignup = async (req, res, next) => {
       req.flash("errors", {
         msg: "Account with that email address or username already exists.",
       });
-      return res.redirect("../signup");
+      return res.redirect("../");
     }
+   ;
+    let result;
+
+if (req.file) {
+  result = await cloudinary.uploader.upload(req.file.path);
+} else {
+  result = {
+    secure_url: "/imgs/profile-demo.png",
+    public_id: "",
+  };
+}
 
     const user = new User({
       userName: req.body.userName,
       email: req.body.email,
+      image: result.secure_url,
+      cloudinaryId: result.public_id,
       password: req.body.password,
     });
 
