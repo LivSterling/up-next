@@ -120,7 +120,7 @@ document.querySelectorAll('.generateMockupBtn').forEach(button => {
     const mockupContainer = document.getElementById('mockupContainer');
     mockupContainer.innerHTML = `
     <h3>Here's your Mockup</h3>
-    <img src="${data.image}" class="h-screen rounded shadow" />
+    <img src="${data.image}" class="w-1/1 rounded shadow" />
       `;
   } catch (err) {
     console.error('Mockup generation failed:', err);
