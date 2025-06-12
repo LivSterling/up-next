@@ -23,6 +23,11 @@
   <img src="<%= posts[i].image %>" alt="Post image" class="w-full rounded-lg object-cover max-h-[80vh]" />
 <% } %>
       </a>
+      <p class="mt-1 border-b border-gray-400 pb-5">
+        <span class="font-semibold"><%= posts[i].user.userName %></span>
+              <%= posts[i].caption %>
+            </p>
+      
     <% } %>
   </div>
 </main>
