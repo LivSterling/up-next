@@ -25,7 +25,7 @@ exports.postLogin = (req, res, next) => {
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
-  });
+  }); 
 
   passport.authenticate("local", (err, user, info) => {
     if (err) {
