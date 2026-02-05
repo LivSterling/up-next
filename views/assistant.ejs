@@ -1,4 +1,12 @@
-<%- include('partials/header') -%> 
+<% if (isGuest) { %>
+  <%- include('partials/header-guest') -%>
+<% } else { %>
+  <%- include('partials/header') -%>
+<% } %>
+
+<script>
+  window.isGuest = <%= isGuest %>;
+</script>
 
 <main class="bg-base-300 w-full max-w-5xl h-auto mx-auto px-4 py-10">
   <section class="flex flex-col items-center space-y-8">
