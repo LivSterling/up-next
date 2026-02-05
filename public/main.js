@@ -1,5 +1,29 @@
- 
- 
+// Upload zone click handler and image preview logic
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const uploadPrompt = document.getElementById('uploadPrompt');
+const imagePreview = document.getElementById('imagePreview');
+const previewImg = document.getElementById('previewImg');
+
+if (uploadZone) {
+  // Click on upload zone triggers file input
+  uploadZone.addEventListener('click', () => fileInput.click());
+
+  // Handle file selection and show preview
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        previewImg.src = e.target.result;
+        uploadPrompt.classList.add('hidden');
+        imagePreview.classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
 document.getElementById('aiForm').addEventListener('submit', async function (e) {
   e.preventDefault(); // Prevent form from reloading page
 
@@ -48,10 +72,6 @@ document.getElementById('aiForm').addEventListener('submit', async function (e) 
 
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = `
-
-
-    
-      <img class="max-h-120 max-w-90" src="${data.image}"" />
         <div class="flex-3">
             <h2>Upcycle Suggestions</h2>
             <div class="collapse collapse-arrow bg-base-100 border border-base-300">
