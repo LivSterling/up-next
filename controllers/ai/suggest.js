@@ -18,7 +18,6 @@ module.exports = {
 
 
 const chatCompletion = await hfClient.chatCompletion({
-    provider: "nebius",
     model: "google/gemma-3-27b-it",
     messages: [
         {
