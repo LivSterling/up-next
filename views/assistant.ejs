@@ -11,7 +11,7 @@
 <main class="bg-base-300 w-full max-w-5xl h-auto mx-auto px-4 py-10">
   <section class="flex flex-col items-center space-y-8">
     <div class="text-center space-y-2">
-      <h1 class="font-bold text-2xl sm:text-3xl">Hey! I'm François. Your personal design assistant.</h1>
+      <h1 class="font-bold text-2xl sm:text-3xl francois-greeting">Hey! I'm François. Your personal design assistant.</h1>
       <p class="text-sm sm:text-base text-gray-600">Upload a photo of a garment and I’ll help you brainstorm fresh upcycling and design ideas!</p>
     </div>
 
@@ -19,7 +19,27 @@
       <h3 class="text-lg font-semibold mb-4 text-center">Upload Garment</h3>
 
       <form id="aiForm" enctype="multipart/form-data" class="space-y-4">
-        <input type="file" name="file" id="fileInput" class="file-input file-input-bordered w-full" />
+        <!-- Custom upload zone replacing the native file input -->
+        <div id="uploadZone" class="upload-zone">
+          <input type="file" name="file" id="fileInput" class="hidden" accept="image/*" />
+          
+          <!-- Before upload state -->
+          <div id="uploadPrompt" class="upload-prompt">
+            <div class="upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+              </svg>
+              <span class="plus-badge">+</span>
+            </div>
+            <p class="text-gray-500 mt-2">Click to upload a garment photo</p>
+          </div>
+          
+          <!-- After upload state (hidden initially) -->
+          <div id="imagePreview" class="image-preview hidden">
+            <img id="previewImg" src="" alt="Uploaded garment" class="max-h-64 rounded-lg object-contain" />
+            <p class="text-gray-400 text-sm mt-2">Click to change image</p>
+          </div>
+        </div>
         <button type="submit" class="btn btn-primary w-full">Generate Suggestions</button>
       </form>
 
