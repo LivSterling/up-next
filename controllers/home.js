@@ -3,6 +3,9 @@ module.exports = {
     res.render("index.ejs");
   },
   getAssistant: (req, res) => {
-    res.render("assistant.ejs");
+    res.render("assistant.ejs", {
+      user: req.user || null,
+      isGuest: !req.isAuthenticated()
+    });
   },
 };

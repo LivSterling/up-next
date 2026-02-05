@@ -118,9 +118,15 @@ document.querySelectorAll('.generateMockupBtn').forEach(button => {
     const data = await res.json();
 
     const mockupContainer = document.getElementById('mockupContainer');
+    const guestCTA = window.isGuest ? `
+      <div class="alert alert-info mt-4">
+        <a href="/signup" class="btn btn-primary">Sign up</a> to save your designs and share with the community!
+      </div>
+    ` : '';
     mockupContainer.innerHTML = `
     <h3>Here's your Mockup</h3>
     <img src="${data.image}" class="w-1/1 rounded shadow" />
+    ${guestCTA}
       `;
   } catch (err) {
     console.error('Mockup generation failed:', err);
